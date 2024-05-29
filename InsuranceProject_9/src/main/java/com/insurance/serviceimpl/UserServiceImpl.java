@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.insurance.exception.IdNotFoundException;
+import com.insurance.exception.ResourceNotFoundException;
 import com.insurance.model.Nominee;
 import com.insurance.model.Policy;
 import com.insurance.model.Premium;
@@ -156,6 +157,16 @@ public class UserServiceImpl implements UserService {
 		workbook.write(ops);
 		// workbook.close();
 		ops.close();
+	}
+
+	@Override
+		public void deleteByUserId(Long id) {
+			//userRepository.deleteById(id);
+		//return null;
+			
+			  User user  = userRepository.findById(id) .orElseThrow(() -> new ResourceNotFoundException("Given Id is Doesnot exist : " + id));
+		                userRepository.deleteById(id);
+		
 	}
 	
 	
