@@ -1,8 +1,16 @@
 package com.insurance.serviceimpl;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,4 +112,34 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user);
 		return response;
 	}
+	
+// Excel file Operation of Policy	
+
+	@Override
+	public void generateExcel(HttpServletResponse response) throws IOException {
+
+		List<Policy> policies = policyRepository.findAll();
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet sheet = workbook.createSheet("Policy_info");
+		HSSFRow row = sheet.createRow(0);
+
+		row.createCell(0).setCellValue("policy_id");
+		row.createCell(1).setCellValue("policy_name");
+		row.createCell(2).setCellValue("policy_status");
+
+		int dataRowIndex = 1;
+			for (Policy p : policies) {
+			HSSFRow dataRow = sheet.createRow(dataRowIndex);
+			dataRow.createCell(0).setCellValue(p.getPolicyId());
+			dataRow.createCell(1).setCellValue(p.getPolicyName());
+			dataRow.createCell(2).setCellValue(p.getPolicyStatus());
+			dataRowIndex++;
+		}
+		ServletOutputStream ops = response.getOutputStream();
+		workbook.write(ops);
+		// workbook.close();
+		ops.close();
+	}
+	
+	
 }
