@@ -112,7 +112,24 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user);
 		return response;
 	}
-	
+
+	 @Transactional(readOnly = true)
+	    public UserResponse getUserDetails(Long id) {
+	        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+
+	        UserResponse userResponse = new UserResponse();
+	        userResponse.setId(user.getId());
+	        userResponse.setFirstName(user.getFirstName());
+	        userResponse.setLastName(user.getLastName());
+	        userResponse.setEmail(user.getEmail());
+	        userResponse.setMobileNumber(user.getMobileNumber());
+	        userResponse.setPolicylist(user.getPolicylist());
+	        userResponse.setNomineelist(user.getNomineelist());
+	        userResponse.setPremiumlist(user.getPremiumlist());
+
+	        return userResponse;
+	    }
+
 // Excel file Operation of Policy	
 
 	@Override
@@ -142,4 +159,5 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
+
 }

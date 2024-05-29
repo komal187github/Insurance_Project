@@ -19,4 +19,6 @@ public interface UserService<UserRequet> {
 //Excel file Operation	
 	public void generateExcel(HttpServletResponse response) throws IOException;
 
+	public UserResponse getUserDetails(Long id);
+
 }

@@ -43,6 +43,13 @@ public class UserController {
 		return ResponseEntity.ok().body(userResponse);
 	}
 
+	@GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getUserDetails(@PathVariable Long id) {
+        UserResponse userResponse = userService.getUserDetails(id);
+        return ResponseEntity.ok().body(userResponse);
+}
+
+
 // API for create excel file and restore policy details.
 		@GetMapping("/excel")
 		public void generateExcelReport(HttpServletResponse response) throws IOException {
@@ -53,4 +60,5 @@ public class UserController {
 			userService.generateExcel(response);
 		}
 	
+
 }
