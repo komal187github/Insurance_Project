@@ -1,8 +1,13 @@
 package com.insurance.controller;
 
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,4 +43,14 @@ public class UserController {
 		return ResponseEntity.ok().body(userResponse);
 	}
 
+// API for create excel file and restore policy details.
+		@GetMapping("/excel")
+		public void generateExcelReport(HttpServletResponse response) throws IOException {
+			response.setContentType("application/octet-stream");
+			String headerKey = "Content-Disposition";
+			String headerValue = "attachment;filename=policydetails.xls";
+			response.setHeader(headerKey, headerValue);
+			userService.generateExcel(response);
+		}
+	
 }
