@@ -10,4 +10,6 @@ public interface UserService<UserRequet> {
 
 	public UserResponse updateUser(Long id, UserRequest request);
 
+	public UserResponse getUserDetails(Long id);
+
 }
