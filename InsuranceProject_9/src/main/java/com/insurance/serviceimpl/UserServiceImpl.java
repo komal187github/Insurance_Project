@@ -116,8 +116,8 @@ public class UserServiceImpl implements UserService {
 
 	 @Transactional(readOnly = true)
 	    public UserResponse getUserDetails(Long id) {
-	        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-
+	       User user =userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+      
 	        UserResponse userResponse = new UserResponse();
 	        userResponse.setId(user.getId());
 	        userResponse.setFirstName(user.getFirstName());
@@ -127,8 +127,7 @@ public class UserServiceImpl implements UserService {
 	        userResponse.setPolicylist(user.getPolicylist());
 	        userResponse.setNomineelist(user.getNomineelist());
 	        userResponse.setPremiumlist(user.getPremiumlist());
-
-	        return userResponse;
+	        	return userResponse;
 	    }
 
 // Excel file Operation of Policy	
