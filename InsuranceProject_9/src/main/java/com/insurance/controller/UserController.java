@@ -49,7 +49,11 @@ public class UserController {
 		return ResponseEntity.ok().body(user);
 	}
 
-
+	@DeleteMapping("/deletebyid/{id}")
+	public ResponseEntity<String> deleteByUserId(@PathVariable long id) {
+		userService.deleteUser(id);
+		return ResponseEntity.ok("Account is deleted Sucessfully..!!");
+	}
 
 // API for create excel file and restore policy details.
 	@GetMapping("/excel")
@@ -60,12 +64,5 @@ public class UserController {
 		response.setHeader(headerKey, headerValue);
 		userService.generateExcel(response);
 	}
-
-	@DeleteMapping("/deletebyid/{id}")
-	public ResponseEntity<String> deleteByUserId(@PathVariable long id) {
-		userService.deleteByUserId(id);
-		return ResponseEntity.ok("Account is deleted Sucessfully..!!");
-	}
-
 
 }

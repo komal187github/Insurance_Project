@@ -107,31 +107,11 @@ public class UserServiceImpl implements UserService {
 		return response;
 	}
 
-<<<<<<< HEAD
 	@Override
 	public User readUser(Long id) {
 		return userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Given Id is Does not exist : " + id));
 	}
-=======
-	 @Transactional(readOnly = true)
-	    public UserResponse getUserDetails(Long id) {
-	       User user =userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-      
-	        UserResponse userResponse = new UserResponse();
-	        userResponse.setId(user.getId());
-	        userResponse.setFirstName(user.getFirstName());
-	        userResponse.setLastName(user.getLastName());
-	        userResponse.setEmail(user.getEmail());
-	        userResponse.setMobileNumber(user.getMobileNumber());
-	        userResponse.setPolicylist(user.getPolicylist());
-	        userResponse.setNomineelist(user.getNomineelist());
-	        userResponse.setPremiumlist(user.getPremiumlist());
-	        	return userResponse;
-	    }
-
-// Excel file Operation of Policy	
->>>>>>> master
 
 	@Override
 	public void deleteUser(Long id) {
@@ -165,20 +145,5 @@ public class UserServiceImpl implements UserService {
 		// workbook.close();
 		ops.close();
 	}
-<<<<<<< HEAD
-=======
-
-	@Override
-		public void deleteByUserId(Long id) {
-			//userRepository.deleteById(id);
-		//return null;
-			
-			  User user  = userRepository.findById(id) .orElseThrow(() -> new ResourceNotFoundException("Given Id is Doesnot exist : " + id));
-		                userRepository.deleteById(id);
-		
-	}
-	
-	
->>>>>>> master
 
 }

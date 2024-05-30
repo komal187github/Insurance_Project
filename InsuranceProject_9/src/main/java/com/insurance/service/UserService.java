@@ -16,7 +16,7 @@ public interface UserService<UserRequet> {
 //Update User with multiple Policy,Premium and Nominee.	
 	public UserResponse updateUser(Long id, UserRequest request);
 
-<<<<<<< HEAD
+
 //Get User with multiple Policy,Premium and Nominee.	
 	public User readUser(Long id);
 
@@ -26,14 +26,11 @@ public interface UserService<UserRequet> {
 //Excel file Operation	
 	public void generateExcel(HttpServletResponse response) throws IOException;
 
-=======
-//Excel file Operation	
-	public void generateExcel(HttpServletResponse response) throws IOException;
 
-	public UserResponse getUserDetails(Long id);
 
-	// delete data
-	public void deleteByUserId(Long id);
 
->>>>>>> master
+
+
+
+
 }
