@@ -1,4 +1,4 @@
-package com.insurance.model;
+package com.insurance.entity;
 
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User {
+public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,28 +17,18 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String dateOfBirth;
+	private String mobileNumber;
 	private String gender;
 	private String email;
-	private String mobileNumber;
 	private String adharCard;
 	private String panCard;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Policy> policylist;
+	private List<PolicyEntity> policylist;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Nominee> nomineelist;
+	private List<NomineeEntity> nomineelist;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Premium> premiumlist;
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth
-				+ ", gender=" + gender + ", email=" + email + ", mobileNumber=" + mobileNumber + ", adharCard="
-				+ adharCard + ", panCard=" + panCard + ", policylist=" + policylist + ", nomineelist=" + nomineelist
-				+ ", premiumlist=" + premiumlist + "]";
-	}
 
 	public long getId() {
 		return id;
@@ -72,6 +62,14 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
 	public String getGender() {
 		return gender;
 	}
@@ -86,14 +84,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
 	}
 
 	public String getAdharCard() {
@@ -112,28 +102,29 @@ public class User {
 		this.panCard = panCard;
 	}
 
-	public List<Policy> getPolicylist() {
+	public List<PolicyEntity> getPolicylist() {
 		return policylist;
 	}
 
-	public void setPolicylist(List<Policy> policylist) {
+	public void setPolicylist(List<PolicyEntity> policylist) {
 		this.policylist = policylist;
 	}
 
-	public List<Nominee> getNomineelist() {
+	public List<NomineeEntity> getNomineelist() {
 		return nomineelist;
 	}
 
-	public void setNomineelist(List<Nominee> nomineelist) {
+	public void setNomineelist(List<NomineeEntity> nomineelist) {
 		this.nomineelist = nomineelist;
 	}
 
-	public List<Premium> getPremiumlist() {
-		return premiumlist;
-	}
 
-	public void setPremiumlist(List<Premium> premiumlist) {
-		this.premiumlist = premiumlist;
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth
+				+ ", mobileNumber=" + mobileNumber + ", gender=" + gender + ", email=" + email + ", adharCard="
+				+ adharCard + ", panCard=" + panCard + ", policylist=" + policylist + ", nomineelist=" + nomineelist
+				+ "]";
 	}
 
 }

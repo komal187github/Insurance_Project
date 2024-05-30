@@ -3,7 +3,6 @@ package com.insurance.serviceimpl;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.insurance.exception.IdNotFoundException;
 import com.insurance.exception.ResourceNotFoundException;
@@ -57,18 +55,16 @@ public class UserServiceImpl implements UserService {
 		user.setLastName(request.getLastName());
 		user.setEmail(request.getEmail());
 		user.setMobileNumber(request.getMobileNumber());
-
 		response.setId(user.getId());
 		response.setFirstName(user.getFirstName());
 		response.setLastName(user.getLastName());
 		response.setEmail(user.getEmail());
 		response.setMobileNumber(user.getMobileNumber());
-
 		user.getPolicylist().clear();
 		user.getNomineelist().clear();
 		user.getPremiumlist().clear();
 
-		// Update polices
+//Update polices
 		for (Policy policy : request.getPolicylist()) {
 			Optional<Policy> existingPolicy = policyRepository.findById(policy.getPolicyId());
 			if (existingPolicy.isPresent()) {
@@ -80,8 +76,7 @@ public class UserServiceImpl implements UserService {
 				new IdNotFoundException("Policy with that is not Present");
 			}
 		}
-
-		// Update Nominee
+//Update Nominee
 		for (Nominee nominee : request.getNomineelist()) {
 			Optional<Nominee> existingNominee = nomineeRepository.findById(nominee.getNomineeid());
 			if (existingNominee.isPresent()) {
@@ -95,8 +90,7 @@ public class UserServiceImpl implements UserService {
 				new IdNotFoundException("Nominee with that is not Present");
 			}
 		}
-
-		// Update Premium details
+//Update Premium details
 		for (Premium premium : request.getPremiumlist()) {
 			Optional<Premium> existingPremiun = premiumRepository.findById(premium.getPrimiumId());
 			if (existingPremiun.isPresent()) {
@@ -109,32 +103,26 @@ public class UserServiceImpl implements UserService {
 				new IdNotFoundException("Premium with that is not Present");
 			}
 		}
-
 		userRepository.save(user);
 		return response;
 	}
 
-	 @Transactional(readOnly = true)
-	    public UserResponse getUserDetails(Long id) {
-	       User user =userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-      
-	        UserResponse userResponse = new UserResponse();
-	        userResponse.setId(user.getId());
-	        userResponse.setFirstName(user.getFirstName());
-	        userResponse.setLastName(user.getLastName());
-	        userResponse.setEmail(user.getEmail());
-	        userResponse.setMobileNumber(user.getMobileNumber());
-	        userResponse.setPolicylist(user.getPolicylist());
-	        userResponse.setNomineelist(user.getNomineelist());
-	        userResponse.setPremiumlist(user.getPremiumlist());
-	        	return userResponse;
-	    }
-
-// Excel file Operation of Policy	
+	@Override
+	public User readUser(Long id) {
+		return userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Given Id is Does not exist : " + id));
+	}
 
 	@Override
-	public void generateExcel(HttpServletResponse response) throws IOException {
+	public void deleteUser(Long id) {
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Given Id is Does not exist : " + id));
+		userRepository.deleteById(id);
+	}
 
+// Excel file Operation of Policy	
+	@Override
+	public void generateExcel(HttpServletResponse response) throws IOException {
 		List<Policy> policies = policyRepository.findAll();
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		HSSFSheet sheet = workbook.createSheet("Policy_info");
@@ -145,7 +133,7 @@ public class UserServiceImpl implements UserService {
 		row.createCell(2).setCellValue("policy_status");
 
 		int dataRowIndex = 1;
-			for (Policy p : policies) {
+		for (Policy p : policies) {
 			HSSFRow dataRow = sheet.createRow(dataRowIndex);
 			dataRow.createCell(0).setCellValue(p.getPolicyId());
 			dataRow.createCell(1).setCellValue(p.getPolicyName());
@@ -157,17 +145,5 @@ public class UserServiceImpl implements UserService {
 		// workbook.close();
 		ops.close();
 	}
-
-	@Override
-		public void deleteByUserId(Long id) {
-			//userRepository.deleteById(id);
-		//return null;
-			
-			  User user  = userRepository.findById(id) .orElseThrow(() -> new ResourceNotFoundException("Given Id is Doesnot exist : " + id));
-		                userRepository.deleteById(id);
-		
-	}
-	
-	
 
 }

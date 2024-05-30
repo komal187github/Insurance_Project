@@ -1,12 +1,14 @@
-package com.insurance.model;
+package com.insurance.entity;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
-public class Nominee {
+public class NomineeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,23 +17,7 @@ public class Nominee {
 	private int nomineeAge;
 	private String relation;
 
-	public Nominee() {
-		super();
-	}
 
-	public Nominee(long nomineeid, String nomineeName, int nomineeAge, String relation) {
-		super();
-		this.nomineeid = nomineeid;
-		this.nomineeName = nomineeName;
-		this.nomineeAge = nomineeAge;
-		this.relation = relation;
-	}
-
-	@Override
-	public String toString() {
-		return "Nominee [nomineeid=" + nomineeid + ", nomineeName=" + nomineeName + ", nomineeAge=" + nomineeAge
-				+ ", relation=" + relation + "]";
-	}
 
 	public long getNomineeid() {
 		return nomineeid;
@@ -65,4 +51,27 @@ public class Nominee {
 		this.relation = relation;
 	}
 
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
+//
+//	public long getId() {
+//		return id;
+//	}
+//
+//	public void setId(long id) {
+//		this.id = id;
+//	}
+
+	@Override
+	public String toString() {
+		return "Nominee [nomineeid=" + nomineeid + ", nomineeName=" + nomineeName + ", nomineeAge=" + nomineeAge
+				+ ", relation=" + relation + "]";
+	}
+
+	
 }

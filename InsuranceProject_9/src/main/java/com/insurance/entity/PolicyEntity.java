@@ -1,12 +1,14 @@
-package com.insurance.model;
+package com.insurance.entity;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
-public class Policy {
+public class PolicyEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +16,6 @@ public class Policy {
 	private String policyName;
 	private String policyStatus;
 
-	@Override
-	public String toString() {
-		return "Policy [policyId=" + policyId + ", policyName=" + policyName + ", policyStatus=" + policyStatus + "]";
-	}
 
 	public long getPolicyId() {
 		return policyId;
@@ -43,4 +41,27 @@ public class Policy {
 		this.policyStatus = policyStatus;
 	}
 
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
+//
+//	public long getId() {
+//		return id;
+//	}
+//
+//	public void setId(long id) {
+//		this.id = id;
+//	}
+
+	@Override
+	public String toString() {
+		return "Policy [policyId=" + policyId + ", policyName=" + policyName + ", policyStatus=" + policyStatus
+				+ "]";
+	}
+
+	
 }

@@ -38,15 +38,21 @@ public class UserController {
 	}
 
 	@PutMapping("/updateuser/{id}")
-	public ResponseEntity<UserResponse> updateUserw(@PathVariable Long id, @RequestBody UserRequest request) {
-		UserResponse userResponse = userService.updateUser(id, request);
-		return ResponseEntity.ok().body(userResponse);
+	public ResponseEntity<UserResponse> updateUserw(@PathVariable Long id, @RequestBody UserRequest userRequest) {
+		UserResponse user = userService.updateUser(id, userRequest);
+		return ResponseEntity.ok().body(user);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<UserResponse> getUserDetails(@PathVariable Long id) {
-		UserResponse userResponse = userService.getUserDetails(id);
-		return ResponseEntity.ok().body(userResponse);
+	@GetMapping("/readuser/{id}")
+	public ResponseEntity<User> readUser(@PathVariable long id) {
+		User user = userService.readUser(id);
+		return ResponseEntity.ok().body(user);
+	}
+
+	@DeleteMapping("/deletebyid/{id}")
+	public ResponseEntity<String> deleteByUserId(@PathVariable long id) {
+		userService.deleteUser(id);
+		return ResponseEntity.ok("Account is deleted Sucessfully..!!");
 	}
 
 // API for create excel file and restore policy details.
@@ -57,12 +63,6 @@ public class UserController {
 		String headerValue = "attachment;filename=policydetails.xls";
 		response.setHeader(headerKey, headerValue);
 		userService.generateExcel(response);
-	}
-
-	@DeleteMapping("/deletebyid/{id}")
-	public ResponseEntity<String> deleteByUserId(@PathVariable long id) {
-		userService.deleteByUserId(id);
-		return ResponseEntity.ok("Account is deleted Sucessfully..!!");
 	}
 
 }
