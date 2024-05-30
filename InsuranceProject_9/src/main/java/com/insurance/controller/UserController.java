@@ -1,12 +1,12 @@
 package com.insurance.controller;
 
-
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,27 +38,31 @@ public class UserController {
 	}
 
 	@PutMapping("/updateuser/{id}")
-	public ResponseEntity<UserResponse> updateUserw(@PathVariable Long id, @RequestBody UserRequest request) {
-		UserResponse userResponse = userService.updateUser(id, request);
-		return ResponseEntity.ok().body(userResponse);
+	public ResponseEntity<UserResponse> updateUserw(@PathVariable Long id, @RequestBody UserRequest userRequest) {
+		UserResponse user = userService.updateUser(id, userRequest);
+		return ResponseEntity.ok().body(user);
 	}
 
-	@GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUserDetails(@PathVariable Long id) {
-        UserResponse userResponse = userService.getUserDetails(id);
-        return ResponseEntity.ok().body(userResponse);
-}
+	@GetMapping("/readuser/{id}")
+	public ResponseEntity<User> readUser(@PathVariable long id) {
+		User user = userService.readUser(id);
+		return ResponseEntity.ok().body(user);
+	}
 
+	@DeleteMapping("/deletebyid/{id}")
+	public ResponseEntity<String> deleteByUserId(@PathVariable long id) {
+		userService.deleteUser(id);
+		return ResponseEntity.ok("Account is deleted Sucessfully..!!");
+	}
 
 // API for create excel file and restore policy details.
-		@GetMapping("/excel")
-		public void generateExcelReport(HttpServletResponse response) throws IOException {
-			response.setContentType("application/octet-stream");
-			String headerKey = "Content-Disposition";
-			String headerValue = "attachment;filename=policydetails.xls";
-			response.setHeader(headerKey, headerValue);
-			userService.generateExcel(response);
-		}
-	
+	@GetMapping("/excel")
+	public void generateExcelReport(HttpServletResponse response) throws IOException {
+		response.setContentType("application/octet-stream");
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment;filename=policydetails.xls";
+		response.setHeader(headerKey, headerValue);
+		userService.generateExcel(response);
+	}
 
 }
