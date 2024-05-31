@@ -15,19 +15,14 @@ public class UserEntityServiceImpl implements UserEntityService {
 	@Autowired
 	private UserEntityRepository userEntityRepository;
 	
-	@Override
-	public UserEntity saveUserEntity(UserEntity userEntity) {
-		return userEntityRepository.save(userEntity);
-	}
 
-	
+    @Override
+    public UserEntity getUserById(long id) {
+        return userEntityRepository.findById(id).orElse(null);
+    }
 
-
-	
-
-
-
-	
-
-	}
-
+    @Override
+    public UserEntity saveUserEntity(UserEntity userEntity) {
+        return userEntityRepository.save(userEntity);
+    }
+}

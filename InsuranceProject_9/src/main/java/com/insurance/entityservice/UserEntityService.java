@@ -7,6 +7,8 @@ public interface UserEntityService {
 	//Save User API
 	public UserEntity saveUserEntity(UserEntity userEntity);
 
+	UserEntity getUserById(long id);
+
 	
 
 	
