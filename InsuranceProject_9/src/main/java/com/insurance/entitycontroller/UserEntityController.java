@@ -2,20 +2,16 @@ package com.insurance.entitycontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
-=======
 import org.springframework.web.bind.annotation.GetMapping;
->>>>>>> 581467c9c37f23b4df949f33c42f4ec151750005
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.insurance.entity.UserEntity;
 import com.insurance.entityservice.UserEntityService;
-import com.insurance.model.User;
+
 
 @RestController
 @RequestMapping("/userentity")
@@ -29,7 +25,7 @@ public class UserEntityController {
 		UserEntity entity=userEntityService.saveUserEntity(userEntity);
 		return ResponseEntity.ok().body(entity);
 	}
-	   @PutMapping("/updateuser/{userId}")
+	   @PutMapping("/updateuserentity/{userId}")
 	    public ResponseEntity<UserEntity> updateUser(@PathVariable long userId, @RequestBody UserEntity updatedUser) {
 	        UserEntity existingUser = userEntityService.getUserById(userId);
 

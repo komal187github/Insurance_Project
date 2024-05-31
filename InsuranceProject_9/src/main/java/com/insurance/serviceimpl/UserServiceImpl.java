@@ -47,64 +47,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserResponse updateUser(Long id, UserRequest request) {
-		User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Account not exist..!!!"));
-		// Update user attributes
-		UserResponse response = new UserResponse();
-		user.setFirstName(request.getFirstName());
-		user.setLastName(request.getLastName());
-		user.setEmail(request.getEmail());
-		user.setMobileNumber(request.getMobileNumber());
-		response.setId(user.getId());
-		response.setFirstName(user.getFirstName());
-		response.setLastName(user.getLastName());
-		response.setEmail(user.getEmail());
-		response.setMobileNumber(user.getMobileNumber());
-		user.getPolicylist().clear();
-		user.getNomineelist().clear();
-		user.getPremiumlist().clear();
-
-//Update polices
-		for (Policy policy : request.getPolicylist()) {
-			Optional<Policy> existingPolicy = policyRepository.findById(policy.getPolicyId());
-			if (existingPolicy.isPresent()) {
-				Policy updatep = existingPolicy.get();
-				updatep.setPolicyName(policy.getPolicyName());
-				policyRepository.save(updatep);
-				response.setPolicylist(user.getPolicylist());
-			} else {
-				new IdNotFoundException("Policy with that is not Present");
-			}
-		}
-//Update Nominee
-		for (Nominee nominee : request.getNomineelist()) {
-			Optional<Nominee> existingNominee = nomineeRepository.findById(nominee.getNomineeid());
-			if (existingNominee.isPresent()) {
-				Nominee updateNominee = existingNominee.get();
-				updateNominee.setNomineeName(nominee.getNomineeName());
-				updateNominee.setNomineeAge(nominee.getNomineeAge());
-				updateNominee.setRelation(nominee.getRelation());
-				nomineeRepository.save(updateNominee);
-				response.setNomineelist(user.getNomineelist());
-			} else {
-				new IdNotFoundException("Nominee with that is not Present");
-			}
-		}
-//Update Premium details
-		for (Premium premium : request.getPremiumlist()) {
-			Optional<Premium> existingPremiun = premiumRepository.findById(premium.getPrimiumId());
-			if (existingPremiun.isPresent()) {
-				Premium updatePremium = existingPremiun.get();
-				updatePremium.setPaymentFrequency(premium.getPaymentFrequency());
-				updatePremium.setPaymentMethod(premium.getPaymentMethod());
-				premiumRepository.save(updatePremium);
-				response.setPremiumlist(user.getPremiumlist());
-			} else {
-				new IdNotFoundException("Premium with that is not Present");
-			}
-		}
-		userRepository.save(user);
-		return response;
+	public User updateUser(Long id, User user) {
+		User existiongUser =userRepository.findById(id).orElseThrow(()->new IdNotFoundException("Given User with "+id+"not exist..!!"));
+			existiongUser.setFirstName(user.getFirstName());
+			existiongUser.setLastName(user.getLastName());
+			existiongUser.setMobileNumber(user.getMobileNumber());
+			existiongUser.setEmail(user.getEmail());
+			existiongUser.setPolicylist(user.getPolicylist());
+			existiongUser.setNomineelist(user.getNomineelist());
+			existiongUser.setPremiumlist(user.getPremiumlist());
+			userRepository.save(existiongUser);
+		return existiongUser;
 	}
 
 	@Override
