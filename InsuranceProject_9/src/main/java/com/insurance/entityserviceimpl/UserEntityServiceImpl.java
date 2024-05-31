@@ -23,6 +23,13 @@ public class UserEntityServiceImpl implements UserEntityService {
 	@Autowired
 	private PolicyEntityRepository policyEntityRepository;
 	
+<<<<<<< HEAD
+
+    @Override
+    public UserEntity getUserById(long id) {
+        return userEntityRepository.findById(id).orElse(null);
+    }
+=======
 	//save user
 	@Override
 	public UserEntity saveUserEntity(UserEntity userEntity) {
@@ -45,4 +52,10 @@ public class UserEntityServiceImpl implements UserEntityService {
 	
 
 	}
+>>>>>>> 581467c9c37f23b4df949f33c42f4ec151750005
 
+    @Override
+    public UserEntity saveUserEntity(UserEntity userEntity) {
+        return userEntityRepository.save(userEntity);
+    }
+}
