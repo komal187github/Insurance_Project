@@ -31,8 +31,20 @@ public class UserEntityServiceImpl implements UserEntityService {
 	private NomineeEntityRepository nomineeEntityRepository;
 	@Autowired
 	private PolicyEntityRepository policyEntityRepository;
+<<<<<<< HEAD
+	
+
+
+    @Override
+    public UserEntity getUserById(long id) {
+        return userEntityRepository.findById(id).orElse(null);
+    }
+
+	//save user
+=======
 
 	// save user
+>>>>>>> master
 	@Override
 	public UserEntity saveUserEntity(UserEntity userEntity) {
 		return userEntityRepository.save(userEntity);
@@ -45,6 +57,10 @@ public class UserEntityServiceImpl implements UserEntityService {
 				.orElseThrow(() -> new ResourceNotFoundException("Given Id is Does not exist : " + id));
 	}
 
+<<<<<<< HEAD
+   
+}
+=======
 // update api	
 	@Override
 	public UserEntity getUserById(long id) {
@@ -86,3 +102,4 @@ public class UserEntityServiceImpl implements UserEntityService {
 	}
 
 }
+>>>>>>> master

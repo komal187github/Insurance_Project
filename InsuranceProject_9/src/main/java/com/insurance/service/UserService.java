@@ -14,7 +14,7 @@ public interface UserService<UserRequet> {
 	public User saveUserDetails(User user);
 
 //Update User with multiple Policy,Premium and Nominee.	
-	public UserResponse updateUser(Long id, UserRequest request);
+	public User updateUser(Long id, User user);
 
 
 //Get User with multiple Policy,Premium and Nominee.	
