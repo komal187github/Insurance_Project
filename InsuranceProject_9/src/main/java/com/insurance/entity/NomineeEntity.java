@@ -1,11 +1,9 @@
 package com.insurance.entity;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 
 @Entity
 public class NomineeEntity {
@@ -16,8 +14,6 @@ public class NomineeEntity {
 	private String nomineeName;
 	private int nomineeAge;
 	private String relation;
-
-
 
 	public long getNomineeid() {
 		return nomineeid;
@@ -73,5 +69,4 @@ public class NomineeEntity {
 				+ ", relation=" + relation + "]";
 	}
 
-	
 }
