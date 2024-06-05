@@ -16,11 +16,22 @@ public interface UserEntityService {
 
 	// Get User with multiple Policy and Nominee.
 	public UserEntity readUserEntity(Long id);
+<<<<<<< HEAD
+	
+	
+	//Delete User with multiple Policy,Premium and Nominee.		
+		public void deleteUserEntity(Long id);
+		
+		//Csv file Operation	
+		public void generateCsvFile(HttpServletResponse response) throws IOException;
+
+=======
 
 	// Delete User with multiple Policy,Premium and Nominee.
 	public void deleteUserEntity(Long id);
 
 	// Csv file Operation
 	public void generateCsvFile(HttpServletResponse response) throws IOException;
+>>>>>>> master
 
 }
