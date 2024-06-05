@@ -7,7 +7,5 @@ import com.insurance.model.Premium;
 
 @Repository
 public interface PremiumRepository extends JpaRepository<Premium, Long> {
-	
-	
 
 }

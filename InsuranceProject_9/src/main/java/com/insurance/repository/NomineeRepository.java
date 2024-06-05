@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.insurance.model.Nominee;
 
 @Repository
-public interface NomineeRepository extends JpaRepository<Nominee, Long>{
+public interface NomineeRepository extends JpaRepository<Nominee, Long> {
 
 }

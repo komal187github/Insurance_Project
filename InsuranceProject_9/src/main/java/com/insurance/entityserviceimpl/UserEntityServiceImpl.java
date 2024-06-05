@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +23,12 @@ import com.insurance.entityservice.UserEntityService;
 import com.insurance.exception.IdNotFoundException;
 import com.insurance.exception.ResourceNotFoundException;
 import com.insurance.model.Policy;
+import com.insurance.service.UserService;
 
 @Service
 public class UserEntityServiceImpl implements UserEntityService {
+
+	private static final Logger logger = LoggerFactory.getLogger(UserEntityServiceImpl.class);
 
 	@Autowired
 	private UserEntityRepository userEntityRepository;
@@ -32,13 +37,18 @@ public class UserEntityServiceImpl implements UserEntityService {
 	@Autowired
 	private PolicyEntityRepository policyEntityRepository;
 
+<<<<<<< HEAD
 	
 	//save user
+=======
+>>>>>>> master
 	@Override
 	public UserEntity saveUserEntity(UserEntity userEntity) {
+		logger.info("UserEntityServiceImpl implementaion : saveUserEntity() method : " + userEntity);
 		return userEntityRepository.save(userEntity);
 	}
 
+<<<<<<< HEAD
 //get user
 	@Override
 	public UserEntity readUserEntity(Long id) {
@@ -48,13 +58,24 @@ public class UserEntityServiceImpl implements UserEntityService {
 
 
 // update api	
+=======
+>>>>>>> master
 	@Override
 	public UserEntity getUserById(long id) {
+		logger.info("UserEntityServiceImpl implementaion : getUserById() updatedetails method");
 		return userEntityRepository.findById(id).orElse(null);
 	}
 
 	@Override
+	public UserEntity readUserEntity(Long id) {
+		logger.info("UserEntityServiceImpl implementaion : readUserEntity() getdetails method: ");
+		return userEntityRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Given Id is Does not exist : " + id));
+	}
+
+	@Override
 	public void deleteUserEntity(Long id) {
+		logger.info("UserEntityServiceImpl implementaion : deleteUserEntity() method");
 		UserEntity userentity = userEntityRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Given Id is Does not exist : " + id));
 		userEntityRepository.deleteById(id);
@@ -63,6 +84,7 @@ public class UserEntityServiceImpl implements UserEntityService {
 
 	@Override
 	public void generateCsvFile(HttpServletResponse response) throws IOException {
+		logger.info("UserEntityServiceImpl implementaion : generateCsvFile for All policy details  ");
 		List<PolicyEntity> policyentity = policyEntityRepository.findAll();
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		HSSFSheet sheet = workbook.createSheet("Policy_info");
@@ -84,8 +106,10 @@ public class UserEntityServiceImpl implements UserEntityService {
 		workbook.write(ops);
 		// workbook.close();
 		ops.close();
-
 	}
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master

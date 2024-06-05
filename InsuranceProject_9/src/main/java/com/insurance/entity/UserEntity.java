@@ -29,7 +29,6 @@ public class UserEntity {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<NomineeEntity> nomineelist;
 
-
 	public long getId() {
 		return id;
 	}
@@ -117,7 +116,6 @@ public class UserEntity {
 	public void setNomineelist(List<NomineeEntity> nomineelist) {
 		this.nomineelist = nomineelist;
 	}
-
 
 	@Override
 	public String toString() {

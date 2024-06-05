@@ -16,7 +16,6 @@ public interface UserService<UserRequet> {
 //Update User with multiple Policy,Premium and Nominee.	
 	public User updateUser(Long id, User user);
 
-
 //Get User with multiple Policy,Premium and Nominee.	
 	public User readUser(Long id);
 
@@ -25,12 +24,5 @@ public interface UserService<UserRequet> {
 
 //Excel file Operation	
 	public void generateExcel(HttpServletResponse response) throws IOException;
-
-
-
-
-
-
-
 
 }

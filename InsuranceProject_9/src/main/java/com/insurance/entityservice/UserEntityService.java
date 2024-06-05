@@ -6,18 +6,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.insurance.entity.UserEntity;
 
-
 public interface UserEntityService {
 
 	// Save User API
 	public UserEntity saveUserEntity(UserEntity userEntity);
 
-	//update api
-
+	// update api
 	UserEntity getUserById(long id);
 
 	// Get User with multiple Policy and Nominee.
 	public UserEntity readUserEntity(Long id);
+<<<<<<< HEAD
 	
 	
 	//Delete User with multiple Policy,Premium and Nominee.		
@@ -26,5 +25,13 @@ public interface UserEntityService {
 		//Csv file Operation	
 		public void generateCsvFile(HttpServletResponse response) throws IOException;
 
+=======
+
+	// Delete User with multiple Policy,Premium and Nominee.
+	public void deleteUserEntity(Long id);
+
+	// Csv file Operation
+	public void generateCsvFile(HttpServletResponse response) throws IOException;
+>>>>>>> master
 
 }
