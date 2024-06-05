@@ -19,12 +19,7 @@ public interface UserEntityService {
 	// Get User with multiple Policy and Nominee.
 	public UserEntity readUserEntity(Long id);
 	
-
-
-	//Get User with multiple Policy and Nominee.	
-		public UserEntity readUserEntity(Long id);
-		
-
+	
 	//Delete User with multiple Policy,Premium and Nominee.		
 		public void deleteUserEntity(Long id);
 		
