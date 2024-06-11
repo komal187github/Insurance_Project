@@ -37,18 +37,15 @@ public class UserEntityServiceImpl implements UserEntityService {
 	@Autowired
 	private PolicyEntityRepository policyEntityRepository;
 
-<<<<<<< HEAD
-	
 	//save user
-=======
->>>>>>> master
+
 	@Override
 	public UserEntity saveUserEntity(UserEntity userEntity) {
 		logger.info("UserEntityServiceImpl implementaion : saveUserEntity() method : " + userEntity);
 		return userEntityRepository.save(userEntity);
 	}
 
-<<<<<<< HEAD
+
 //get user
 	@Override
 	public UserEntity readUserEntity(Long id) {
@@ -58,20 +55,14 @@ public class UserEntityServiceImpl implements UserEntityService {
 
 
 // update api	
-=======
->>>>>>> master
+
 	@Override
 	public UserEntity getUserById(long id) {
 		logger.info("UserEntityServiceImpl implementaion : getUserById() updatedetails method");
 		return userEntityRepository.findById(id).orElse(null);
 	}
 
-	@Override
-	public UserEntity readUserEntity(Long id) {
-		logger.info("UserEntityServiceImpl implementaion : readUserEntity() getdetails method: ");
-		return userEntityRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Given Id is Does not exist : " + id));
-	}
+
 
 	@Override
 	public void deleteUserEntity(Long id) {
@@ -109,7 +100,4 @@ public class UserEntityServiceImpl implements UserEntityService {
 	}
 
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> master

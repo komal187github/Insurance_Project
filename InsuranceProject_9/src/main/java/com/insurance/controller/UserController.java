@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.insurance.exception.ErrorResponse;
+import com.insurance.exception.IdNotFoundException;
+import com.insurance.exception.ResourceNotFoundException;
 import com.insurance.model.User;
 import com.insurance.repository.UserRepository;
 import com.insurance.response.UserRequest;
@@ -72,6 +77,16 @@ public class UserController {
 		String headerValue = "attachment;filename=policydetails.xls";
 		response.setHeader(headerKey, headerValue);
 		userService.generateExcel(response);
+	}
+//	@ExceptionHandler(value = IdNotFoundException.class)
+//	public ErrorResponse handleIdNotFoundException(IdNotFoundException exp) {
+//		return new ErrorResponse(HttpStatus.NOT_FOUND.value(),exp.getMessage());
+//	}
+
+	@ExceptionHandler(value = ResourceNotFoundException.class)
+	public ErrorResponse handleResourceNotFoundException(ResourceNotFoundException exp) {
+		return new ErrorResponse(HttpStatus.NOT_FOUND.value(), exp.getMessage());
+
 	}
 
 }
