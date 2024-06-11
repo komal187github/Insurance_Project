@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	public User updateUser(Long id, User user) {
 		logger.info("UserServiceImpl implementaion : updateUsereDeatils() method: " + user);
 		User existiongUser = userRepository.findById(id)
-				.orElseThrow(() -> new IdNotFoundException("Given User with " + id + "not exist..!!"));
+				.orElseThrow(() -> new IdNotFoundException("Given id with " +id+" not exist...!!!"));
 		existiongUser.setFirstName(user.getFirstName());
 		existiongUser.setLastName(user.getLastName());
 		existiongUser.setMobileNumber(user.getMobileNumber());
